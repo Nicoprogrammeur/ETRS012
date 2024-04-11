@@ -14,3 +14,7 @@ https://www.chirpstack.io/docs/chirpstack/api/index.html
 Réaliser l’opération inverse, c’est-à-dire récupérer dans un fichier formaté toutes les
 informations des devices associés à une application.
 ## Deux moyens de récupérer les données
+## 1 Avec une image 
+
+## 2 avec une caméra
+
