@@ -13,3 +13,4 @@ https://www.chirpstack.io/docs/chirpstack/api/index.html
 ## Etape 3
 Réaliser l’opération inverse, c’est-à-dire récupérer dans un fichier formaté toutes les
 informations des devices associés à une application.
+## Deux moyens de récupérer les données
