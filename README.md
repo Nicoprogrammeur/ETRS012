@@ -12,7 +12,8 @@ Ce mini-projet est subdivisé en 3 étapes
 ## Etape 1
 Numériser ces identifiants via un outil de reconnaissance optique de caractères (OCR) puis les stocker dans un fichier formaté en CSV.
 ## Prérequis
-On a besoin d'installer plusieurs packages Python qui gèrent différentes parties de la fonctionnalité.<br/>
+Il y a un environnement virtuel python qui existe qui s'appelle .\loraOCR avec les packages ci-dessous<br/>
+On a besoin d'installer les packages Python qui gèrent différentes parties de la fonctionnalité.<br/>
 Voici les packages nécessaires et leurs fonctions :
 - OpenCV (cv2) 
 Utilisé pour manipuler les images et détecter les QR codes.
@@ -31,7 +32,7 @@ pip install opencv-python Pillow pytesseract
 ```
 ## Deux moyens de récupérer les identifiants d'un device dans un fichier formaté en csv
 ### Extraire les identifiants du device depuis une image.
-On utilise le code python **camera_image.py** pour extraire les identifiants d'un device et les mettre dans un fichier cvs.<br/>
+On utilise le code python **camera_image_v3.py** pour extraire les identifiants d'un device et les mettre dans un fichier cvs.<br/>
 Il faut renseigner dans le script python le chemin du répertoire où l'image est stockée et le chemin où on souhaite stocker le fichier csv.
 ```
 # Chemin vers l'image contenant le texte imprimé et le QR code
@@ -68,13 +69,12 @@ dans notre cas, nous travaillons pour enregistrer les device dans chirpstack
 Pour enregister automatiquemet les devices dans le serveur chirpstack, on utilise le script python code/app_add_device.py.<br/>
 pour cela, on a besoin de rennseigner dans le script python **code/app_add_device.py** les informations suivantes:
 - l'adresse et le port du serveur chirpstack
-- l'api_token
+- l'api_token dans **code/info_api.py**
 - les identifiants de l'application
 - l'identifiant du profil du device
 Ces informations sont à mettre à jour dans le script selon les besoins
 ```
 server = "192.168.170.72:8080"
-api_token = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 applicationId = "yyyyyyyy1111111111111222222222223333333333333333"
 deviceProfileId = "zzzzzzzzzzzzzz1111111112222222223333333333333"
 ```
@@ -129,7 +129,7 @@ with open("donnees_extraites.csv", 'r') as file:
 ```
 ## procédure de lancement des exécutables 
 - Lancer le **traitement_image.exe** pour extraire les identifiants d'une image et les stocker dans un fichier csv
-- Lancer le **ajout_device_serveur.exe** pour enregistrer la liste des devices dans l'application
+- Lancer le **dist/ajout_device_serveur.exe** pour enregistrer la liste des devices dans l'application
 - Lancer le **liste_donnees** pour récupérer les doonnées des devices
 - lancer le **suppr_donnees** pour supprimer un device dans l'application 
 
