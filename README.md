@@ -5,6 +5,7 @@ Mettre en place un mécanisme qui permet de :
 ```
 - récupérer les identifiants d'un device et les stockés dans un fichier formaté en csv
 - ajouter un device dans l'application chirpstack avec les idenetifiants stockés dans le fichier csv
+- supprimer un device sans se connecter dans l'application
 - récupérer les données d'un device depuis l'application chirpstack et les mettre dans un fichier formaté en csv  
 ```
 Ce mini-projet est subdivisé en 3 étapes
