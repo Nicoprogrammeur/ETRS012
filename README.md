@@ -45,6 +45,16 @@ Le code récupère les informations suivantes et les mettre dans le fichier csv:
 - appeui
 ```
 ### Récupérer les données du device avec une caméra et les stocker dans un fichier csv
+Dans cette partie, on récupère les données du device depuis une caméra et les stockées directement dans le  fichier csv.<br/>
+On utilise le script **python camera_v3_15_20.py** pour lancer la caméra et de prendre une image directement avec la caméra.<br/>
+Les données seront directement sauvegardées dans le fichier csv renseigné dans le script python.<br/>
+Il faut renseigner le chemin où  on souhaite stocker le fichier csv.
+```
+# Chemin du fichier CSV où les données seront sauvegardées
+csv_path = 'donnees_extraites.csv'
+```
+On récupère les mêmes données comme mentionnéees sur la **première partie**
+
 ## Etape 2
 Ajouter automatiquement dans une application déclarée d’un Network Server privé, les
 devices via les API adéquates :
