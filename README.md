@@ -7,14 +7,6 @@ L’objectif de ces séances est de nous placer en situation d’acquisition de 
 Numériser ces identifiants via un outil de reconnaissance optique de caractères (OCR)1
 puis les stocker dans un fichier formaté en CSV.
 
-## Etape 2
-Ajouter automatiquement dans une application déclarée d’un Network Server privé, les
-devices via les API adéquates :
-https://www.thethingsindustries.com/docs/api/
-https://www.chirpstack.io/docs/chirpstack/api/index.html
-## Etape 3
-Réaliser l’opération inverse, c’est-à-dire récupérer dans un fichier formaté toutes les
-informations des devices associés à une application.
 ## Prérequis
 On a besoin d'installer plusieurs packages Python qui gèrent différentes parties de la fonctionnalité.<br/>
 Voici les packages nécessaires et leurs fonctions :
@@ -53,4 +45,13 @@ Le code récupère les informations suivantes et les mettre dans le fichier csv:
 - appeui
 ```
 ### 2 avec une caméra
+## Etape 2
+Ajouter automatiquement dans une application déclarée d’un Network Server privé, les
+devices via les API adéquates :
+https://www.thethingsindustries.com/docs/api/
+https://www.chirpstack.io/docs/chirpstack/api/index.html
+
+## Etape 3
+Réaliser l’opération inverse, c’est-à-dire récupérer dans un fichier formaté toutes les
+informations des devices associés à une application.
 
