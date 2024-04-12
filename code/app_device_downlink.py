@@ -1,6 +1,7 @@
 import csv
 import grpc
 from chirpstack_api import api
+import info_api
 
 # Fonction pour afficher les devices de l'applications
 def read_device(client, dev_eui, auth_token):
@@ -56,7 +57,7 @@ if __name__ == "__main__":
   server = "192.168.170.72:8080"
 
   # The API token (retrieved using the web-interface).
-  api_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjaGlycHN0YWNrIiwiaXNzIjoiY2hpcnBzdGFjayIsInN1YiI6IjJhODk3MGI1LTRiZDYtNGE0OC1iZDgyLWFmNjk5OWExMmZkMSIsInR5cCI6ImtleSJ9.Rm4ERWTExi6X9jNsdqMADwTN0mSwsf9VToK4-NcGvpI"
+  # info_api.py -> api_token = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
   # Connect without using TLS.
   channel = grpc.insecure_channel(server)
@@ -65,10 +66,10 @@ if __name__ == "__main__":
   client = api.DeviceServiceStub(channel)
 
   # Define the API key meta-data.
-  auth_token = [("authorization", "Bearer %s" % api_token)]
+  auth_token = [("authorization", "Bearer %s" % info_api.api_token)]
   
   # Lisez le fichier CSV et créez les dispositifs
-  with open("test.csv", 'r') as file:
+  with open("donnees_extraites.csv", 'r') as file:
         csvreader = csv.reader(file)
         header = next(csvreader)  # Ignorez la première ligne (entête)
         

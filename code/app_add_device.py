@@ -1,6 +1,7 @@
 import csv
 import grpc
 from chirpstack_api import api
+import info_api
 
 # Fonction pour vérifier si un dispositif existe déjà
 def device_exists(client, dev_eui, auth_token):
@@ -30,20 +31,16 @@ def create_device(client, dev_eui, app_id, dev_id, dev_name, auth_token):
 if __name__ == "__main__":
     # Configuration.
     server = "192.168.170.72:8080"
-    api_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjaGlycHN0YWNrIiwiaXNzIjoiY2hpcnBzdGFjayIsInN1YiI6IjJhODk3MGI1LTRiZDYtNGE0OC1iZDgyLWFmNjk5OWExMmZkMSIsInR5cCI6ImtleSJ9.Rm4ERWTExi6X9jNsdqMADwTN0mSwsf9VToK4-NcGvpI"
-
-    applicationId = "edf7601d-444b-425f-bf47-c7316e536b2c"
-    deviceProfileId = "0f6c9945-8d09-4a2f-b8a4-b3c3067f6b7d"
 
     # Connectez-vous au serveur ChirpStack
     channel = grpc.insecure_channel(server)
     client = api.DeviceServiceStub(channel)
     
     # Définissez les métadonnées d'authentification
-    auth_token = [("authorization", "Bearer %s" % api_token)]
+    auth_token = [("authorization", "Bearer %s" % info_api.api_token)]
     
     # Lisez le fichier CSV et créez les dispositifs
-    with open("test.csv", 'r') as file:
+    with open("donnees_extraites.csv", 'r') as file:
         csvreader = csv.reader(file)
         header = next(csvreader)  # Ignorez la première ligne (entête)
         
@@ -60,6 +57,6 @@ if __name__ == "__main__":
             else:
                 dev_addr = row[0]
                 # Créez le dispositif en utilisant les clés spécifiées
-                resp = create_device(client, dev_eui, applicationId, deviceProfileId, dev_addr, auth_token)
+                resp = create_device(client, dev_eui, info_api.applicationId, info_api.deviceProfileId, dev_addr, auth_token)
                 # Affichez l'ID du dispositif créé
                 print(f"Dispositif créé avec le dev_eui: {dev_eui}")

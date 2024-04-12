@@ -1,6 +1,7 @@
 import csv
 import grpc
 from chirpstack_api import api
+import info_api
 
 # Fonction pour supprimer un device de l'applications
 def delete_device(client, auth_token, device):
@@ -33,15 +34,14 @@ def device_exists(client, dev_eui, auth_token):
 
 if __name__ == "__main__":
     server = "192.168.170.72:8080"
-    api_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjaGlycHN0YWNrIiwiaXNzIjoiY2hpcnBzdGFjayIsInN1YiI6IjJhODk3MGI1LTRiZDYtNGE0OC1iZDgyLWFmNjk5OWExMmZkMSIsInR5cCI6ImtleSJ9.Rm4ERWTExi6X9jNsdqMADwTN0mSwsf9VToK4-NcGvpI"
     
     # Connectez-vous au serveur ChirpStack
     channel = grpc.insecure_channel(server)
     client = api.DeviceServiceStub(channel)
-    auth_token = [("authorization", "Bearer %s" % api_token)]
+    auth_token = [("authorization", "Bearer %s" % info_api.api_token)]
     
     # Lisez le fichier CSV et créez les dispositifs
-    with open("test.csv", 'r') as file:
+    with open("donnees_extraites.csv", 'r') as file:
         csvreader = csv.reader(file)
         header = next(csvreader)  # Ignorez la première ligne (entête)
         
@@ -57,7 +57,7 @@ if __name__ == "__main__":
             
     del_dev_eui = input("\nIndiquer le dev_eui à effacer: ")
     
-    if device_exists(client, dev_eui, auth_token):
+    if device_exists(client, del_dev_eui, auth_token):
         delete_device(client, auth_token, del_dev_eui)
         
         print(f"\nLe dispositif avec le dev_eui {del_dev_eui} à été supprimer.")
