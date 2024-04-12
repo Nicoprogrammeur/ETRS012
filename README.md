@@ -69,9 +69,43 @@ dans notre cas, nous travaillons pour enregistrer les device dans chirpstack
 ```
 Pour enregister automatiquemet les devices dans le serveur chirpstack, on utilise le script python code/app_add_device.py.<br/>
 pour cela, on a besoin de rennseigner dans le script python **code/app_add_device.py** les informations suivantes:
+- l'adresse et le port du serveur chirpstack
+- l'api_token
+- les identifiants de l'application
+- l'identifiant du profil du device
+Ces informations sont à mettre à jour dans le script selon les besoins
 ```
-
+server = "192.168.170.72:8080"
+api_token = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+applicationId = "yyyyyyyy11111111111112222222222233333333333333333"
+deviceProfileId = "zzzzzzzzzzzzzz1111111112222222223333333333333"
 ```
+*NB:* L'applicationId et le deviceProfileId sont récupérable dans l'application chirpstack.
+- le chemin du fichier csv où sont sauvegardés les identifiants des devices à enregistrer dans l'application.
+```
+    # Lisez le fichier CSV et créez les dispositifs
+    with open("test.csv", 'r') as file:
+        csvreader = csv.reader(file)
+        header = next(csvreader)  # Ignorez la première ligne (entête)
+        
+        for row in csvreader:
+            dev_addr = row[0]
+            app_key = row[1]
+            appskey = row[2]
+            nwkskey = row[3]
+            app_eui = row[4]
+            dev_eui = row[5]
+        
+            if device_exists(client, dev_eui, auth_token):
+                print(f"Le dispositif avec le dev_eui {dev_eui} existe déjà.")
+            else:
+                dev_addr = row[0]
+                # Créez le dispositif en utilisant les clés spécifiées
+                resp = create_device(client, dev_eui, applicationId, deviceProfileId, dev_addr, auth_token)
+                # Affichez l'ID du dispositif créé
+                print(f"Dispositif créé avec le dev_eui: {dev_eui}")
+```
+Le script ci-dessus lis le fichier csv et récupère les identifiants des devices.
 ## Etape 3
 Réaliser l’opération inverse, c’est-à-dire récupérer dans un fichier formaté toutes les
 informations des devices associés à une application.
