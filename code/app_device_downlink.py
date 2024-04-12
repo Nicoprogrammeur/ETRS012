@@ -82,3 +82,8 @@ if __name__ == "__main__":
             if device_exists(client, dev_eui, auth_token):
                 # Créez le dispositif en utilisant les clés spécifiées
                 resp = read_device(client, dev_eui, auth_token)
+  
+  print('\nVoir plus d\'info du device ')
+  recup_dev_eui = input('Indique son dev_eui:  ')
+  
+  info_device(client, recup_dev_eui, auth_token)
