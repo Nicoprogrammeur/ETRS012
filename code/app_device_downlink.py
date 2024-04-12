@@ -22,6 +22,8 @@ def info_device(client, dev_eui, auth_token):
 
   resp = client.Get(req, metadata=auth_token)
   
+  print(f"\ninformation du dev_eui {dev_eui}:\n")
+  
   print(f"description: {resp.device.description}")
   print(f"ApplicationId: {resp.device.application_id}")
   print(f"DeviceProfileId: {resp.device.device_profile_id}")

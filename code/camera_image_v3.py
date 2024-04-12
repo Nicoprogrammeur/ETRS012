@@ -5,9 +5,12 @@ from PIL import Image
 import csv
 import os
 
+# Il faut absolument avoir un répertoire "img" avec toutes les images dedans
+
 def lister_fichiers_recursivement(repertoire):
     for racine, repertoires, fichiers in os.walk(repertoire):
         for fichier in fichiers:
+            print(f'--------------------------')
             print(os.path.join(racine, fichier))
             
             # Chemin vers l'image contenant le texte imprimé et le QR code
@@ -25,13 +28,23 @@ def lister_fichiers_recursivement(repertoire):
             # Utiliser pytesseract pour obtenir le texte imprimé
             extracted_text = pytesseract.image_to_string(image_pil)
             
+            print(f'{extracted_text}\n\n')
+            
             # Définir les expressions régulières pour les différents champs
             devaddr_regex = r'DEV ADDR: ([A-F0-9]+)'
             appkey_regex = r'APP KEY: ([A-F0-9]+)'
             appskey_regex = r'APPSKEY: ([A-F0-9]+)'
             netskey_regex = r'NETSKEY: ([A-F0-9]+)'
-            appeui_regex = r'APP EUI:.*?([A-F0-9]+)'
-            deveui_regex = r'DEV EUI:.*?([A-F0-9]+)'
+            appeui_regex = r'\b(?:APP\s?EUI)\s*:\s*([A-F0-9_]+)'
+            deveui_regex = r'\b(?:DEV\s?EUI)\s*:\s*([A-F0-9_]+)'
+            
+            #regex de fou
+            #devaddr_regex = r'\b(?:DEV\s?ADDR)\s*:\s*([A-F0-9_\sS£]*)'
+            #appkey_regex = r'\b(?:APP\s?KEY)\s*:\s*([A-F0-9_\sS£]*)'
+            #appskey_regex = r'\b(?:APPSKEY)\s*:\s*([A-F0-9_\sS£]*)'
+            #netskey_regex = r'\b(?:NETSKEY)\s*:\s*([A-F0-9_\sS£]*)'
+            #appeui_regex = r'\b(?:APP\s?EUI)\s*:\s*([A-F0-9_\sS£]*)'
+            #deveui_regex = r'\b(?:DEV\s?EUI)\s*:\s*([A-F0-9_\sS£]*)'
 
             # Chercher les données dans le texte extrait
             devaddr_match = re.search(devaddr_regex, extracted_text)
@@ -77,9 +90,11 @@ def lister_fichiers_recursivement(repertoire):
                     appskey_match.group(1) if appskey_match else '',
                     netskey_match.group(1) if netskey_match else '',
                     appeui_match.group(1) if appeui_match else '',
-                    deveui_match.group(1) if appeui_match else ''
+                    deveui_match.group(1) if deveui_match else '',
+                    os.path.join(fichier)
                 ])
 
 if __name__ == "__main__":
+    # Il faut absolument avoir un répertoire "img" avec toutes les images dedans
     lister_fichiers_recursivement('img')
     
