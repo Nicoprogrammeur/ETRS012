@@ -31,7 +31,7 @@ pip install opencv-python Pillow pytesseract
 ```
 ## Deux moyens de récupérer les identifiants d'un device dans un fichier formaté en csv
 ### Extraire les identifiants du device depuis une image.
-On utilise le code python **camera_image.py** pour extraire les identifiants d'un device et les mettre dans un fichier cvs.<br/>
+On utilise le code python **traitement_image_v3.py** pour extraire les identifiants d'un device et les mettre dans un fichier cvs.<br/>
 Il faut renseigner dans le script python le chemin du répertoire où l'image est stockée et le chemin où on souhaite stocker le fichier csv.
 ```
 # Chemin vers l'image contenant le texte imprimé et le QR code
@@ -129,7 +129,7 @@ with open("donnees_extraites.csv", 'r') as file:
 ```
 ## procédure de lancement des exécutables 
 - Lancer le **traitement_image.exe** pour extraire les identifiants d'une image et les stocker dans un fichier csv
-- Lancer le **ajout_device_serveur.exe** pour enregistrer la liste des devices dans l'application
+- Lancer le **dist/ajout_device_serveur.exe** pour enregistrer la liste des devices dans l'application
 - Lancer le **liste_donnees** pour récupérer les doonnées des devices
 - lancer le **suppr_donnees** pour supprimer un device dans l'application 
 
