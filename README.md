@@ -68,13 +68,12 @@ dans notre cas, nous travaillons pour enregistrer les device dans chirpstack
 Pour enregister automatiquemet les devices dans le serveur chirpstack, on utilise le script python code/app_add_device.py.<br/>
 pour cela, on a besoin de rennseigner dans le script python **code/app_add_device.py** les informations suivantes:
 - l'adresse et le port du serveur chirpstack
-- l'api_token
+- l'api_token dans **code/info_api.py**
 - les identifiants de l'application
 - l'identifiant du profil du device
 Ces informations sont à mettre à jour dans le script selon les besoins
 ```
 server = "192.168.170.72:8080"
-api_token = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 applicationId = "yyyyyyyy1111111111111222222222223333333333333333"
 deviceProfileId = "zzzzzzzzzzzzzz1111111112222222223333333333333"
 ```
