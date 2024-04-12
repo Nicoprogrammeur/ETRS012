@@ -14,16 +14,16 @@ Numériser ces identifiants via un outil de reconnaissance optique de caractère
 ## Prérequis
 On a besoin d'installer plusieurs packages Python qui gèrent différentes parties de la fonctionnalité.<br/>
 Voici les packages nécessaires et leurs fonctions :
-#### - OpenCV (cv2) 
+- OpenCV (cv2) 
 Utilisé pour manipuler les images et détecter les QR codes.
-#### - Pillow (PIL)
+- Pillow (PIL)
 Utilisé pour manipuler les images d'une manière qui est compatible avec pytesseract pour la reconnaissance optique de caractères (OCR).
-#### - Pytesseract
+- Pytesseract
 Utilisé pour extraire du texte des images.<br/>
 Note: pytesseract nécessite que Tesseract-OCR soit installé sur votre machine.
-#### - csv
+- csv
 Ce module est déjà inclus dans la bibliothèque standard Python, donc aucune installation supplémentaire n'est nécessaire pour gérer les fichiers CSV.
-#### - os
+- os
 Ce module fait également partie de la bibliothèque standard Python et est utilisé pour interagir avec le système d'exploitation, comme vérifier l'existence des fichiers.<br/>
 La commande ci-dessous permet d'installer les packages nécessaires
 ```
@@ -78,7 +78,7 @@ api_token = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 applicationId = "yyyyyyyy1111111111111222222222223333333333333333"
 deviceProfileId = "zzzzzzzzzzzzzz1111111112222222223333333333333"
 ```
-*NB:* L'**applicationId** et le **deviceProfileId** sont récupérable dans l'application chirpstack.
+*NB:* L'**applicationId** et le **deviceProfileId** sont récupérables dans l'application chirpstack.
 - le chemin du fichier csv où sont sauvegardés les identifiants des devices à enregistrer dans l'application.
 ```
     # Lisez le fichier CSV et créez les dispositifs
