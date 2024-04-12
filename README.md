@@ -108,9 +108,24 @@ Le script ci-dessus lit le fichier csv, récupère les identifiants des devices 
 Réaliser l’opération inverse, c’est-à-dire récupérer dans un fichier formaté toutes les
 informations des devices associés à une application.
 Le script python **app_device_downlink.py** permet de récupérer les données d'un device depuis l'application.
-Il faut renseigner l'adresse du serveur chirpstack , le fichier csv pour les devices, ...
+Il faut renseigner l'adresse du serveur chirpstack , le fichier csv pour les devices.<br/>
+Vous trouvez dans le script les lignes suivantes à mettre à jour selon les besoins
 ```
+server = "192.168.170.72:8080"
 
+with open("donnees_extraites.csv", 'r') as file:
+        csvreader = csv.reader(file)
+        header = next(csvreader)  # Ignorez la première ligne (entête)
+        
+        print('list device')
+        print('--------------------------------------------')
+        
+        for row in csvreader:
+            dev_eui = row[5]
+            
+            if device_exists(client, dev_eui, auth_token):
+                # Créez le dispositif en utilisant les clés spécifiées
+                resp = read_device(client, dev_eui, auth_token)
 ```
 ## procédure de lancement des scripts
 - Lancer le **** pour extraire les identifiants d'une image et les stocker dans un fichier csv
