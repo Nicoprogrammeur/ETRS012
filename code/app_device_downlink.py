@@ -2,7 +2,7 @@ import csv
 import grpc
 from chirpstack_api import api
 
-
+# Fonction pour afficher les devices de l'applications
 def read_device(client, dev_eui, auth_token):
   # Construct request.
   req = api.Device(dev_eui=dev_eui)
@@ -72,8 +72,8 @@ if __name__ == "__main__":
         csvreader = csv.reader(file)
         header = next(csvreader)  # Ignorez la première ligne (entête)
         
-        print(f'list device')
-        print(f'--------------------------------------------')
+        print('list device')
+        print('--------------------------------------------')
         
         for row in csvreader:
             dev_eui = row[5]

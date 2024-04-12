@@ -2,11 +2,21 @@ import csv
 import grpc
 from chirpstack_api import api
 
-# Fonction pour supplrimer un device de l'applications
+# Fonction pour supprimer un device de l'applications
 def delete_device(client, auth_token, device):
     req = api.DeleteDeviceRequest(dev_eui=device)
     resp = client.Delete(req, metadata=auth_token)
     return resp
+    
+# Fonction pour afficher les devices de l'applications
+def read_device(client, dev_eui, auth_token):
+    # Construct request.
+    req = api.Device(dev_eui=dev_eui)
+
+    resp = client.Get(req, metadata=auth_token)
+
+    # Print the downlink name
+    print(f"{resp.device.name:10} | {dev_eui}")
 
 # Fonction pour vérifier si un dispositif existe déjà
 def device_exists(client, dev_eui, auth_token):
@@ -35,16 +45,17 @@ if __name__ == "__main__":
         csvreader = csv.reader(file)
         header = next(csvreader)  # Ignorez la première ligne (entête)
         
-        print(f"devices du fichier csv")
+        print(f'list device')
         print("----------------------------")
         
         for row in csvreader:
-            dev_addr = row[0]
             dev_eui = row[5]
             
-            print(f"{dev_addr} | {dev_eui}")
+            if device_exists(client, dev_eui, auth_token):
+                #Afficher le device
+                resp = read_device(client, dev_eui, auth_token)
             
-    del_dev_eui = input("Indiquer le dev_eui à effacer: ")
+    del_dev_eui = input("\nIndiquer le dev_eui à effacer: ")
     
     if device_exists(client, dev_eui, auth_token):
         delete_device(client, auth_token, del_dev_eui)
