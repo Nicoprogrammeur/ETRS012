@@ -117,7 +117,7 @@ Il faut renseigner l'adresse du serveur chirpstack , le fichier csv pour les dev
 - Lancer le **camera_v3_15_20.py** pour extraire les identifiants d'un device via une caméra et les stocker dans un fichier csv
 - Lancer le **code/app_add_device.py** pour enregistrer la liste des devices dans l'application
 - Lancer le **code/app_device_downlink.py** pour récupérer les doonnées des devices
-- lancer le **** pour supprimer un device dans l'application 
+- lancer le **code/app_delete_device.py** pour supprimer un device dans l'application 
 
 
 
