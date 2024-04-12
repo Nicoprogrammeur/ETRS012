@@ -12,7 +12,8 @@ Ce mini-projet est subdivisé en 3 étapes
 ## Etape 1
 Numériser ces identifiants via un outil de reconnaissance optique de caractères (OCR) puis les stocker dans un fichier formaté en CSV.
 ## Prérequis
-On a besoin d'installer plusieurs packages Python qui gèrent différentes parties de la fonctionnalité.<br/>
+Il y a un environnement virtuel python qui existe qui s'appelle .\loraOCR avec les packages ci-dessous<br/>
+On a besoin d'installer les packages Python qui gèrent différentes parties de la fonctionnalité.<br/>
 Voici les packages nécessaires et leurs fonctions :
 - OpenCV (cv2) 
 Utilisé pour manipuler les images et détecter les QR codes.
