@@ -50,7 +50,7 @@ Le code récupère les informations suivantes et les mettre dans le fichier csv:
 ```
 ### Récupérer les identifiants du device avec une caméra et les stocker dans un fichier csv
 Dans cette partie, on récupère les identifiants du device depuis une caméra et les stockées directement dans le  fichier csv.<br/>
-On utilise le script **python camera_v3_15_20.py** pour lancer la caméra et de prendre une image directement avec la caméra.<br/>
+On utilise le script python **camera_v3_15_20.py** pour lancer la caméra et de prendre une image directement avec la caméra.<br/>
 Les données seront directement sauvegardées dans le fichier csv renseigné dans le script python.<br/>
 Il faut renseigner le chemin où  on souhaite stocker le fichier csv.
 ```
@@ -112,6 +112,12 @@ Il faut renseigner l'adresse du serveur chirpstack , le fichier csv pour les dev
 ```
 
 ```
+## procédure de lancement des scripts
+- Lancer le **** pour extraire les identifiants d'une image et les stocker dans un fichier csv
+- Lancer le **camera_v3_15_20.py** pour extraire les identifiants d'un device via une caméra et les stocker dans un fichier csv
+- Lancer le **code/app_add_device.py** pour enregistrer la liste des devices dans l'application
+- Lancer le **code/app_device_downlink.py** pour récupérer les doonnées des devices
+- lancer le **** pour supprimer un device dans l'application 
 
 
 
