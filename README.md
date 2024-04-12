@@ -53,7 +53,7 @@ Il faut renseigner le chemin où  on souhaite stocker le fichier csv.
 # Chemin du fichier CSV où les données seront sauvegardées
 csv_path = 'donnees_extraites.csv'
 ```
-On récupère les mêmes données comme mentionnéees sur la **première partie**
+On récupère les mêmes données comme mentionné sur la **première partie**
 
 ## Etape 2
 Ajouter automatiquement dans une application déclarée d’un Network Server privé, les
