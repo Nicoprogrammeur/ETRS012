@@ -46,7 +46,7 @@ if __name__ == "__main__":
         header = next(csvreader)  # Ignorez la première ligne (entête)
         
         print(f'list device')
-        print("----------------------------")
+        print("-------------------------------")
         
         for row in csvreader:
             dev_eui = row[5]
