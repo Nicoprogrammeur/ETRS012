@@ -9,10 +9,8 @@ Mettre en place un mécanisme qui permet de :
 - supprimer un device sans se connecter directement dans le serveur chirpstack
 - récupérer les données d'un device et les mettre dans un fichier formaté en csv  
 ```
- 
 ## Etape 1
 Numériser ces identifiants via un outil de reconnaissance optique de caractères (OCR) puis les stocker dans un fichier formaté en CSV.
-
 ## Prérequis
 On a besoin d'installer plusieurs packages Python qui gèrent différentes parties de la fonctionnalité.<br/>
 Voici les packages nécessaires et leurs fonctions :
@@ -31,7 +29,7 @@ La commande ci-dessous permet d'installer les packages nécessaires
 ```
 pip install opencv-python Pillow pytesseract
 ```
-## Deux moyens de récupérer les identifiants d'un device dans un fichier d'extensions csv
+## Deux moyens de récupérer les identifiants d'un device dans un fichier formaté en csv
 ### Extraire les identifiants du device depuis une image.
 On utilise le code python **camera_image.py** pour extraire les identifiants d'un device et les mettre dans un fichier cvs.<br/>
 Il faut renseigner dans le script python le chemin du répertoire où l'image est stockée et le chemin où on souhaite stocker le fichier csv.
@@ -76,11 +74,11 @@ pour cela, on a besoin de rennseigner dans le script python **code/app_add_devic
 Ces informations sont à mettre à jour dans le script selon les besoins
 ```
 server = "192.168.170.72:8080"
-api_token = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-applicationId = "yyyyyyyy11111111111112222222222233333333333333333"
+api_token = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+applicationId = "yyyyyyyy1111111111111222222222223333333333333333"
 deviceProfileId = "zzzzzzzzzzzzzz1111111112222222223333333333333"
 ```
-*NB:* L'applicationId et le deviceProfileId sont récupérable dans l'application chirpstack.
+*NB:* L'**applicationId** et le **deviceProfileId** sont récupérable dans l'application chirpstack.
 - le chemin du fichier csv où sont sauvegardés les identifiants des devices à enregistrer dans l'application.
 ```
     # Lisez le fichier CSV et créez les dispositifs
@@ -109,4 +107,6 @@ Le script ci-dessus lis le fichier csv et récupère les identifiants des device
 ## Etape 3
 Réaliser l’opération inverse, c’est-à-dire récupérer dans un fichier formaté toutes les
 informations des devices associés à une application.
+
+
 
