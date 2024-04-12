@@ -5,6 +5,7 @@ Mettre en place un mécanisme qui permet de :
 ```
 - récupérer les identifiants d'un device et les stockés dans un fichier formaté en csv
 - ajouter un device dans l'application chirpstack avec les idenetifiants stockés dans le fichier csv
+- supprimer un device sans se connecter dans l'application
 - récupérer les données d'un device depuis l'application chirpstack et les mettre dans un fichier formaté en csv  
 ```
 Ce mini-projet est subdivisé en 3 étapes
@@ -49,7 +50,7 @@ Le code récupère les informations suivantes et les mettre dans le fichier csv:
 ```
 ### Récupérer les identifiants du device avec une caméra et les stocker dans un fichier csv
 Dans cette partie, on récupère les identifiants du device depuis une caméra et les stockées directement dans le  fichier csv.<br/>
-On utilise le script **python camera_v3_15_20.py** pour lancer la caméra et de prendre une image directement avec la caméra.<br/>
+On utilise le script python **camera_v3_15_20.py** pour lancer la caméra et de prendre une image directement avec la caméra.<br/>
 Les données seront directement sauvegardées dans le fichier csv renseigné dans le script python.<br/>
 Il faut renseigner le chemin où  on souhaite stocker le fichier csv.
 ```
@@ -107,10 +108,30 @@ Le script ci-dessus lit le fichier csv, récupère les identifiants des devices 
 Réaliser l’opération inverse, c’est-à-dire récupérer dans un fichier formaté toutes les
 informations des devices associés à une application.
 Le script python **app_device_downlink.py** permet de récupérer les données d'un device depuis l'application.
-Il faut renseigner l'adresse du serveur chirpstack , le fichier csv pour les devices, ...
+Il faut renseigner l'adresse du serveur chirpstack , le fichier csv pour les devices.<br/>
+Vous trouvez dans le script les lignes suivantes à mettre à jour selon les besoins
 ```
+server = "192.168.170.72:8080"
 
+with open("donnees_extraites.csv", 'r') as file:
+        csvreader = csv.reader(file)
+        header = next(csvreader)  # Ignorez la première ligne (entête)
+        
+        print('list device')
+        print('--------------------------------------------')
+        
+        for row in csvreader:
+            dev_eui = row[5]
+            
+            if device_exists(client, dev_eui, auth_token):
+                # Créez le dispositif en utilisant les clés spécifiées
+                resp = read_device(client, dev_eui, auth_token)
 ```
+## procédure de lancement des exécutables 
+- Lancer le **traitement_image.exe** pour extraire les identifiants d'une image et les stocker dans un fichier csv
+- Lancer le **ajout_device_serveur.exe** pour enregistrer la liste des devices dans l'application
+- Lancer le **liste_donnees** pour récupérer les doonnées des devices
+- lancer le **suppr_donnees** pour supprimer un device dans l'application 
 
 
 
