@@ -44,7 +44,7 @@ Le code récupère les informations suivantes et les mettre dans le fichier csv:
 - netskey
 - appeui
 ```
-### 2 avec une caméra
+### Récupérer les données du device avec une caméra et les stocker dans un fichier csv
 ## Etape 2
 Ajouter automatiquement dans une application déclarée d’un Network Server privé, les
 devices via les API adéquates :
