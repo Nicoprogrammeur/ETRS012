@@ -16,7 +16,7 @@ Utilisé pour manipuler les images et détecter les QR codes.
 Utilisé pour manipuler les images d'une manière qui est compatible avec pytesseract pour la reconnaissance optique de caractères (OCR).
 ### Pytesseract
 Utilisé pour extraire du texte des images.<br/>
-Note: pytesseract nécessite que Tesseract-OCR soit installé sur votre machine. Vous pouvez le télécharger depuis ici et l'installer selon votre système d'exploitation.
+Note: pytesseract nécessite que Tesseract-OCR soit installé sur votre machine.
 ### csv
 Ce module est déjà inclus dans la bibliothèque standard Python, donc aucune installation supplémentaire n'est nécessaire pour gérer les fichiers CSV.
 ### os
@@ -28,7 +28,7 @@ pip install opencv-python Pillow pytesseract
 ## Deux moyens de récupérer les données d'un device dans un fichier d'extensions csv
 ### Extraire les données du device depuis une image.
 On utilise le code python **camera_image.py** pour extraire les donnéées d'un device et les mettre dans un fichier cvs.<br/>
-Il faut renseigner dans le script python le chemin du répertoire où l'image est stocké et le chemin où on souhaite stocker le fichier csv.
+Il faut renseigner dans le script python le chemin du répertoire où l'image est stockée et le chemin où on souhaite stocker le fichier csv.
 ```
 # Chemin vers l'image contenant le texte imprimé et le QR code
 image_path = 'test2.png'
@@ -48,9 +48,9 @@ Le code récupère les informations suivantes et les mettre dans le fichier csv:
 ## Etape 2
 Ajouter automatiquement dans une application déclarée d’un Network Server privé, les
 devices via les API adéquates :
-https://www.thethingsindustries.com/docs/api/
-https://www.chirpstack.io/docs/chirpstack/api/index.html
-
+```
+- https://www.chirpstack.io/docs/chirpstack/api/index.html
+```
 ## Etape 3
 Réaliser l’opération inverse, c’est-à-dire récupérer dans un fichier formaté toutes les
 informations des devices associés à une application.
