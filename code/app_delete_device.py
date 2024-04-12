@@ -40,12 +40,12 @@ if __name__ == "__main__":
     client = api.DeviceServiceStub(channel)
     auth_token = [("authorization", "Bearer %s" % info_api.api_token)]
     
-    # Lisez le fichier CSV et créez les dispositifs
+    # Lisez le fichier CSV
     with open("donnees_extraites.csv", 'r') as file:
         csvreader = csv.reader(file)
         header = next(csvreader)  # Ignorez la première ligne (entête)
         
-        print(f'list device')
+        print(f'liste des devices')
         print("-------------------------------")
         
         for row in csvreader:
@@ -54,14 +54,14 @@ if __name__ == "__main__":
             if device_exists(client, dev_eui, auth_token):
                 #Afficher le device
                 resp = read_device(client, dev_eui, auth_token)
-            
+    
+    # Supprimez le device choisie
     del_dev_eui = input("\nIndiquer le dev_eui à effacer: ")
     
     if device_exists(client, del_dev_eui, auth_token):
         delete_device(client, auth_token, del_dev_eui)
         
         print(f"\nLe dispositif avec le dev_eui {del_dev_eui} à été supprimer.")
-
     else:
         print(f"Le dispositif avec le dev_eui {del_dev_eui} n'existe pas dans l'application.")
 
