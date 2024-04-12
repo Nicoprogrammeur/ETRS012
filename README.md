@@ -1,14 +1,13 @@
-# ETRS012
+# ETRS012: Grpc - chirpsatck
 
 ## Objectif
 Mettre en place un mécanisme qui permet de :
 ```
-- récupérer les identifiants d'un device
-- stocker les identifiants dans un fichier formaté en csv
-- ajouter un device dans le chirpstack avec les idenetifiants stockés dans le fichier csv
-- supprimer un device sans se connecter directement dans le serveur chirpstack
-- récupérer les données d'un device et les mettre dans un fichier formaté en csv  
+- récupérer les identifiants d'un device et les stockés dans un fichier formaté en csv
+- ajouter un device dans l'application chirpstack avec les idenetifiants stockés dans le fichier csv
+- récupérer les données d'un device depuis l'application chirpstack et les mettre dans un fichier formaté en csv  
 ```
+Ce mini-projet est subdivisé en 3 étapes
 ## Etape 1
 Numériser ces identifiants via un outil de reconnaissance optique de caractères (OCR) puis les stocker dans un fichier formaté en CSV.
 ## Prérequis
