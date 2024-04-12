@@ -2,13 +2,6 @@ import csv
 import grpc
 from chirpstack_api import api
 
-# Configuration.
-
-# This must point to the API interface.
-server = "192.168.170.72:8080"
-
-# The API token (retrieved using the web-interface).
-api_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjaGlycHN0YWNrIiwiaXNzIjoiY2hpcnBzdGFjayIsInN1YiI6IjJhODk3MGI1LTRiZDYtNGE0OC1iZDgyLWFmNjk5OWExMmZkMSIsInR5cCI6ImtleSJ9.Rm4ERWTExi6X9jNsdqMADwTN0mSwsf9VToK4-NcGvpI"
 
 def read_device(client, dev_eui, auth_token):
   # Construct request.
@@ -16,8 +9,18 @@ def read_device(client, dev_eui, auth_token):
 
   resp = client.Get(req, metadata=auth_token)
 
-  # Print the downlink id
-  print(f"name: {resp.device.name}")
+  # Print the downlink name and description
+  if resp.device.description:
+    print(f"{resp.device.name:10} | {dev_eui} | {resp.device.description}")
+  else:
+    print(f"{resp.device.name:10} | {dev_eui}")
+  
+def info_device(client, dev_eui, auth_token):
+  # Construct request.
+  req = api.Device(dev_eui=dev_eui)
+
+  resp = client.Get(req, metadata=auth_token)
+  
   print(f"description: {resp.device.description}")
   print(f"ApplicationId: {resp.device.application_id}")
   print(f"DeviceProfileId: {resp.device.device_profile_id}")
@@ -33,8 +36,28 @@ def read_device(client, dev_eui, auth_token):
   print(f"battery: {resp.device_status.battery_level}")
   
   print(f"class_enabled: {resp.class_enabled}")
+  
+# Fonction pour vérifier si un dispositif existe déjà
+def device_exists(client, dev_eui, auth_token):
+	
+    try:
+        req = api.GetDeviceRequest(dev_eui = dev_eui)
+        client.Get(req, metadata=auth_token)
+        return True  # Le dispositif existe
+    except grpc.RpcError as e:
+        if e.code() == grpc.StatusCode.NOT_FOUND:
+            return False  # Le dispositif n'existe pas
+        else:
+            raise  # Répercute d'autres exceptions
 
 if __name__ == "__main__":
+  # Configuration.
+  # This must point to the API interface.
+  server = "192.168.170.72:8080"
+
+  # The API token (retrieved using the web-interface).
+  api_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjaGlycHN0YWNrIiwiaXNzIjoiY2hpcnBzdGFjayIsInN1YiI6IjJhODk3MGI1LTRiZDYtNGE0OC1iZDgyLWFmNjk5OWExMmZkMSIsInR5cCI6ImtleSJ9.Rm4ERWTExi6X9jNsdqMADwTN0mSwsf9VToK4-NcGvpI"
+
   # Connect without using TLS.
   channel = grpc.insecure_channel(server)
 
@@ -49,10 +72,12 @@ if __name__ == "__main__":
         csvreader = csv.reader(file)
         header = next(csvreader)  # Ignorez la première ligne (entête)
         
+        print(f'list device')
+        print(f'--------------------------------------------')
+        
         for row in csvreader:
             dev_eui = row[5]
-        
-            # Créez le dispositif en utilisant les clés spécifiées
-            resp = read_device(client, dev_eui, auth_token)
             
-            print(f'\n --------------------------------------------')
+            if device_exists(client, dev_eui, auth_token):
+                # Créez le dispositif en utilisant les clés spécifiées
+                resp = read_device(client, dev_eui, auth_token)

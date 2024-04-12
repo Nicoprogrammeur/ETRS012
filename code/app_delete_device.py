@@ -2,23 +2,24 @@ import csv
 import grpc
 from chirpstack_api import api
 
-# Fonction pour lister les applications
-def list_application(client, auth_token):
-    req = api.GetApplicationRequest()
-    
-    resp = client.Get(req, metadata=auth_token)
+# Fonction pour supplrimer un device de l'applications
+def delete_device(client, auth_token, device):
+    req = api.DeleteDeviceRequest(dev_eui=device)
+    resp = client.Delete(req, metadata=auth_token)
     return resp
 
-# Fonction pour lister les devices
-def list_devices(client, auth_token):
-    req = api.ListDevicesRequest()
-
-    resp = client.List(req, metadata=auth_token)
-    return resp
-
-# Fonction pour créer un dispositif avec les clés spécifiées (inchangée)
-def delete_device(client, dev_name, auth_token):
-    null
+# Fonction pour vérifier si un dispositif existe déjà
+def device_exists(client, dev_eui, auth_token):
+	
+    try:
+        req = api.GetDeviceRequest(dev_eui = dev_eui)
+        client.Get(req, metadata=auth_token)
+        return True  # Le dispositif existe
+    except grpc.RpcError as e:
+        if e.code() == grpc.StatusCode.NOT_FOUND:
+            return False  # Le dispositif n'existe pas
+        else:
+            raise  # Répercute d'autres exceptions
 
 if __name__ == "__main__":
     server = "192.168.170.72:8080"
@@ -29,15 +30,27 @@ if __name__ == "__main__":
     client = api.DeviceServiceStub(channel)
     auth_token = [("authorization", "Bearer %s" % api_token)]
     
-    applications = list_application(client, auth_token)
-    print('liste des application')
-    print('---------------------')
-    for application in applications.application:
-        print(f'{application.name}')
+    # Lisez le fichier CSV et créez les dispositifs
+    with open("test.csv", 'r') as file:
+        csvreader = csv.reader(file)
+        header = next(csvreader)  # Ignorez la première ligne (entête)
+        
+        print(f"devices du fichier csv")
+        print("----------------------------")
+        
+        for row in csvreader:
+            dev_addr = row[0]
+            dev_eui = row[5]
+            
+            print(f"{dev_addr} | {dev_eui}")
+            
+    del_dev_eui = input("Indiquer le dev_eui à effacer: ")
     
-    #devices = list_devices(client, auth_token)
-    #print(f"ID | Dev EUI           | name")
-    #print(f"-----------------------------")
-    #device_id=0
-    #for device in devices:
-        #print(f"{device_id} | {device.dev_eui} | {device.name}")
+    if device_exists(client, dev_eui, auth_token):
+        delete_device(client, auth_token, del_dev_eui)
+        
+        print(f"\nLe dispositif avec le dev_eui {del_dev_eui} à été supprimer.")
+
+    else:
+        print(f"Le dispositif avec le dev_eui {del_dev_eui} n'existe pas dans l'application.")
+
