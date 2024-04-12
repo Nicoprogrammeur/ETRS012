@@ -68,6 +68,10 @@ dans notre cas, nous travaillons pour enregistrer les device dans chirpstack
 - https://www.chirpstack.io/docs/chirpstack/api/index.html
 ```
 Pour enregister automatiquemet les devices dans le serveur chirpstack, on utilise le script python code/app_add_device.py.<br/>
+pour cela, on a besoin de rennseigner dans le script python **code/app_add_device.py** les informations suivantes:
+```
+
+```
 ## Etape 3
 Réaliser l’opération inverse, c’est-à-dire récupérer dans un fichier formaté toutes les
 informations des devices associés à une application.
