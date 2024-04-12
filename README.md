@@ -103,7 +103,7 @@ deviceProfileId = "zzzzzzzzzzzzzz1111111112222222223333333333333"
                 # Affichez l'ID du dispositif créé
                 print(f"Dispositif créé avec le dev_eui: {dev_eui}")
 ```
-Le script ci-dessus lis le fichier csv et récupère les identifiants des devices.
+Le script ci-dessus lit le fichier csv et récupère les identifiants des devices.
 ## Etape 3
 Réaliser l’opération inverse, c’est-à-dire récupérer dans un fichier formaté toutes les
 informations des devices associés à une application.
