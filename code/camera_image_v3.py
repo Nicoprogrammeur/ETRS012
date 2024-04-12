@@ -26,7 +26,7 @@ def lister_fichiers_recursivement(repertoire):
             extracted_text = pytesseract.image_to_string(image_pil)
             
             # Définir les expressions régulières pour les différents champs
-            devaddr_regex = r'DEV ADDR: (\w+)'
+            devaddr_regex = r'DEV ADDR: ([A-F0-9]+)'
             appkey_regex = r'APP KEY: ([A-F0-9]+)'
             appskey_regex = r'APPSKEY: ([A-F0-9]+)'
             netskey_regex = r'NETSKEY: ([A-F0-9]+)'
