@@ -33,8 +33,24 @@ La commande ci-dessous permet d'installer les packages nécessaires
 ```
 pip install opencv-python Pillow pytesseract
 ```
-## Deux moyens de récupérer les données
-### 1 Avec une image 
+## Deux moyens de récupérer les données d'un device dans un fichier d'extensions csv
+### Extraire les données du device depuis une image.
+On utilise le code python **camera_image.py** pour extraire les donnéées d'un device et les mettre dans un fichier cvs.<br/>
+Il faut renseigner dans le script python le chemin du répertoire où l'image est stocké et le chemin où on souhaite stocker le fichier csv.
+```
+# Chemin vers l'image contenant le texte imprimé et le QR code
+image_path = 'test2.png'
 
+# Chemin du fichier CSV où les données seront sauvegardées
+csv_path = 'donnees_extraites.csv'
+```
+Le code récupère les informations suivantes et les mettre dans le fichier csv:
+```
+- devaddr
+- appkey
+- appskey
+- netskey
+- appeui
+```
 ### 2 avec une caméra
 
